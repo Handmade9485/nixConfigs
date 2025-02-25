@@ -6,6 +6,7 @@
       (modulesPath + "/installer/scan/not-detected.nix") # auto generated
       /etc/nixos/sharedDependencies/configuration.nix
       /etc/nixos/sharedDependencies/users/nanya.nix
+      ./services/luantiServer.nix
     ];
 
   networking.hostName = "nas"; # Define your hostname.
@@ -14,12 +15,14 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [ 
+      22
+    ];
   };
 
   # Bootloader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
+  # boot.loader.grub.efiSupport = true;
   boot.loader.grub.zfsSupport = true;
   boot.loader.grub.devices = [ "/dev/sda" ];
   boot.loader.efi.canTouchEfiVariables = true;
@@ -27,8 +30,11 @@
   security.rtkit.enable = true;
 
   environment.systemPackages = with pkgs; [
+    podman-compose
     zsh
   ];
+
+  virtualisation.podman.enable = true;
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBTrNBPKSEaoDC/po8s/v6RqPGETuozKLxbKuIlhOyrO" # nanya
