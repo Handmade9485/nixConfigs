@@ -5,4 +5,10 @@
 			self.nixosModules.officePcConfiguration
 		];
 	};
+
+	flake.nixosConfigurations.tv = inputs.nixpkgs.lib.nixosSystem {
+		modules = [
+			self.nixosModules.tvConfiguration
+		];
+	};
 }

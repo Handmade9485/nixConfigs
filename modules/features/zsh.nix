@@ -22,10 +22,17 @@
  		programs.zsh.initContent = ''
  			bindkey "^[[1;5D" backward-word
  			bindkey "^[[1;5C" forward-word
+			systest() {
+				sudo nixos-rebuild test --flake /etc/nixos#$1
+			}
+			sysupgrade() {
+				sudo nixos-rebuild switch --flake /etc/nixos#$1
+			}
  		'';
 
-		programs.zsh.shellAliases.nix-shell = "nix-shell --command zsh";
-		programs.zsh.shellAliases.sysupgrade = "sudo nixos-rebuild switch --flake ~/.config/nixflakes && home-manager switch --flake ~/.config/nixflakes && nix flake update --flake ~/.config/nixflakes";
-		programs.zsh.shellAliases.music-dlp = "yt-dlp --embed-metadata -f 'ba' -x --audio-format 'mp3' --cookies-from-browser firefox";
+		programs.zsh.shellAliases = {
+			nix-shell = "nix-shell --command zsh";
+			music-dlp = "yt-dlp --embed-metadata -f 'ba' -x --audio-format 'mp3' --cookies-from-browser firefox";
+		};
 	};
 }

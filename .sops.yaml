@@ -1,0 +1,13 @@
+keys:
+  - &users:
+    - &nanya age1sjc0sanwkl0ulkwczw8euqsdjtsa9p5amzjrtpqmuf070rf6gd5s3hz9lp
+    - &tv age133ndj3377my2656ahenpyh6j38tmwk5vesvn0xvqd05edvzwqehqtzlsag
+  - &hosts:
+    - &tvHost age1mm59u5xkkuz2gendgrqatt5g2wlkql9r42aqn5h48d4j77ce545q0wrss7
+creation_rules:
+  - path_regex: /[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *nanya
+      - *tv
+      - *tvHost
